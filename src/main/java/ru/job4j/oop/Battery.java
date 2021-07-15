@@ -12,7 +12,6 @@ public class Battery {
         this.load = 0;
     }
 
-    @SuppressWarnings("checkstyle:OperatorWrap")
     public static void main(String[] args) {
         Battery firstBattery = new Battery(65);
         Battery secondBattery = new Battery(20);
