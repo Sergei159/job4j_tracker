@@ -25,3 +25,4 @@ public class Battery {
                         + ". second : " + secondBattery.load);
     }
 }
+
