@@ -25,10 +25,18 @@ public class PointTest {
     }
 
     @Test
-    public void whenFiveFiveAndTenFiveThen5() {
-        Point a = new Point(5, 5);
-        Point b = new Point(10, 5);
-        double rsl = a.distance(b);
-        assertThat(rsl, closeTo(5, 0.001));
+    public void distanceIs6dot403() {
+        Point a = new Point(0, 0, 0);
+        Point b = new Point(0, 5, 4);
+        double rsl = a.distance3d(b);
+        assertThat(rsl, closeTo(6.403, 0.001));
+    }
+
+    @Test
+    public void distanceIs5Dot477() {
+        Point a = new Point(5, 4, 2);
+        Point b = new Point(0, 5, 4);
+        double rsl = a.distance3d(b);
+        assertThat(rsl, closeTo(5.477, 0.001));
     }
 }
