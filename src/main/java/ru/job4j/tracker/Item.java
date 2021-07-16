@@ -11,11 +11,6 @@ public class Item {
 
     private LocalDateTime created = LocalDateTime.now();
 
-    private DateTimeFormatter formatter
-            = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
-
-    private String currentDateTimeFormat = created.format(formatter);
-
     public Item() {
     }
 
@@ -31,9 +26,4 @@ public class Item {
     public LocalDateTime getCreated() {
         return created;
     }
-
-    public String getCurrentDateTimeFormat() {
-        return currentDateTimeFormat;
-    }
-
 }
