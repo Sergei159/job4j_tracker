@@ -16,7 +16,7 @@ public class MaxTest {
     @Test
     public void maxIsSix() {
         Max a = new Max();
-        int rsl = a.max(6, 4, 5);
+        int rsl = a.max(6, 5, 4);
         Assert.assertEquals(rsl, 6);
     }
 
