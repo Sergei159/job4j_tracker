@@ -69,7 +69,7 @@ public class StartUITest {
         new StartUI(out).init(in, tracker, actions);
         assertThat(out.toString(), is(
                 "Menu." + System.lineSeparator()
-                        + "0. Exit" + System.lineSeparator()
+                        + "0. Exit program" + System.lineSeparator()
         ));
     }
 
@@ -82,13 +82,19 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", "1"}
         );
-        String[] expected = {item.toString(), item1.toString()};
         UserAction[] actions = {
-                 new ShowAllAction(out),
-                new ExitAction()
-        };
-        assertThat(tracker.findAll(), is(
-                 expected
+                 new ShowAllAction(out), new ExitAction()};
+        new StartUI(out).init(in, tracker, actions);
+        assertThat(out.toString(), is(
+                "Menu." + System.lineSeparator()
+                        + "0. Show all Items" + System.lineSeparator()
+                        + "1. Exit program" + System.lineSeparator()
+                        + "=== Show all items ====" + System.lineSeparator()
+                        + item +  System.lineSeparator() + item1
+                        + System.lineSeparator() + "Menu."
+                        + System.lineSeparator()
+                        + "0. Show all Items" + System.lineSeparator()
+                        + "1. Exit program" + System.lineSeparator()
         ));
     }
 
@@ -97,8 +103,9 @@ public class StartUITest {
         Output out = new StubOutput();
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("First"));
+        String pos = "1";
         Input in = new StubInput(
-                new String[] {"0", "1", "2"}
+                new String[] {"0", pos, "2"}
         );
         UserAction[] actions = {
                 new CreateAction(out), new FindByNameAction(out),
@@ -115,8 +122,9 @@ public class StartUITest {
         Output out = new StubOutput();
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("First"));
+        String pos = "1";
         Input in = new StubInput(
-                new String[] {"0", "1", "2"}
+                new String[] {"0", pos, "2"}
         );
         UserAction[] actions = {
                 new CreateAction(out), new FindByIdAction(out),
