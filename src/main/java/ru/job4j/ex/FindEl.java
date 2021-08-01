@@ -10,8 +10,11 @@ public class FindEl {
                 break;
             }
         }
-        throw new ElementNotFoundException(
-                "Name is not found");
+        if (rsl == -1) {
+            throw new ElementNotFoundException(
+                    "Name is not found");
+        }
+        return rsl;
       }
 
     public static void main(String[] args) {
