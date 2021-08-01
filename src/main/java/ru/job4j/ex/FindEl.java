@@ -5,7 +5,6 @@ public class FindEl {
             throws ElementNotFoundException {
         int rsl = -1;
         for (int i = 0; i < value.length; i++) {
-<<<<<<< HEAD
             if (value[i].equals(key)) {
                 rsl = i;
                 break;
@@ -13,17 +12,7 @@ public class FindEl {
         }
         throw new ElementNotFoundException(
                 "Name is not found");
-=======
-            if (value[i] == key) {
-                rsl = i;
-            } else {
-                throw new ElementNotFoundException(
-                        "Name is not found");
-            }
-        }
-        return rsl;
->>>>>>> origin/master
-    }
+      }
 
     public static void main(String[] args) {
         String[] names = {
