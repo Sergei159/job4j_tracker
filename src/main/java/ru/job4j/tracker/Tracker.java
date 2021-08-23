@@ -5,29 +5,33 @@ import ru.job4j.search.Person;
 
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Tracker {
-    private final ArrayList<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
     private int ids = 1;
    // private int size = 0;
 
-    public ArrayList<Item> add(Item item) {
+    public Item add(Item item) {
         item.setId(ids++);
         items.add(item);
-        return items;
-    }
-
-    public Item findById(int id) {
-        Item item = items.get(id - 1);
         return item;
     }
 
-    public ArrayList<Item> findAll() {
+    public Item findById(int id) {
+        Item item = null;
+        if (id > 0 && id <= items.size()) {
+            item = items.get(id - 1);
+        }
+        return item;
+    }
+
+    public List<Item> findAll() {
         return items;
     }
 
-    public ArrayList<Item> findByName(String key) {
-        ArrayList<Item> result = new ArrayList<>();
+    public List<Item> findByName(String key) {
+        List<Item> result = new ArrayList<>();
         for (Item item : items) {
             if (key.equals(item.getName())) {
                 result.add(item);

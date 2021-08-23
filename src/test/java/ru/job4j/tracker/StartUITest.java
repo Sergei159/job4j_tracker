@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.core.Is.is;
@@ -16,10 +17,9 @@ public class StartUITest {
                 new String[] {"0", "Item name", "1"}
         );
         Tracker tracker = new Tracker();
-        UserAction[] actions = {
-                new CreateAction(out),
-                new ExitAction()
-        };
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new CreateAction(out));
+        actions.add(new ExitAction());
         new StartUI(out).init(in, tracker, actions);
         assertThat(tracker.findAll().get(0).getName(),
                 is("Item name"));
@@ -29,37 +29,34 @@ public class StartUITest {
     public void whenReplaceItem() {
         Output out = new StubOutput();
         Tracker tracker = new Tracker();
-        ArrayList<Item> items = tracker.add(new Item("Replaced item"));
+        Item item = tracker.add(new Item("Replaced item"));
         String replacedName = "New item name";
         Input in = new StubInput(
-                new String[] {"0", String.valueOf(items),
+                new String[] {"0", String.valueOf(item.getId()),
                         replacedName, "1"}
         );
-        UserAction[] actions = {
-                new EditItemAction(out),
-                new ExitAction()
-        };
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new EditItemAction(out));
+        actions.add(new ExitAction());
         new StartUI(out).init(in, tracker, actions);
-                assertThat(tracker.findById(items.size() - 1).getName(),
+                assertThat(tracker.findById(item.getId()).getName(),
                 is(replacedName));
-//        assertThat(tracker.findById(item.getId).getName(), is(replacedName));
     }
 
     @Test
     public void whenDeleteItem() {
         Output out = new StubOutput();
         Tracker tracker = new Tracker();
-        ArrayList<Item> items = tracker.add(
+        Item item = tracker.add(
                 new Item("Deleted item"));
         Input in = new StubInput(
-                new String[] {"0", String.valueOf(items.get(items.size() - 1)), "1"}
+                new String[] {"0", String.valueOf(item.getId()), "1"}
         );
-        UserAction[] actions = {
-                new DeleteItemAction(out),
-                new ExitAction()
-        };
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new DeleteItemAction(out));
+        actions.add(new ExitAction());
         new StartUI(out).init(in, tracker, actions);
-        assertThat(tracker.findById(items.size() - 1), is(nullValue()));
+        assertThat(tracker.findById(item.getId()), is(nullValue()));
     }
 
     @Test
@@ -69,9 +66,8 @@ public class StartUITest {
                 new String[] {"0"}
         );
         Tracker tracker = new Tracker();
-        UserAction[] actions = {
-                new ExitAction()
-        };
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new ExitAction());
         new StartUI(out).init(in, tracker, actions);
         assertThat(out.toString(), is(
                 "Menu." + System.lineSeparator()
@@ -83,17 +79,14 @@ public class StartUITest {
     public void whenFindAll() {
         Output out = new StubOutput();
         Tracker tracker = new Tracker();
-
-        ArrayList<Item> items = tracker.add(new Item("First"));
-        tracker.add(new Item("Second"));
-//        Item item = tracker.add(new Item("First"));
-//        Item item1 = tracker.add(new Item("Second"));
+        Item item = tracker.add(new Item("First"));
+        Item item1 = tracker.add(new Item("Scond"));
         Input in = new StubInput(
                 new String[]{"0", "1"}
                 );
-        UserAction[] actions = {
-                new ShowAllAction(out), new ExitAction()
-                };
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new ShowAllAction(out));
+        actions.add(new ExitAction());
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString(), is(
@@ -101,8 +94,8 @@ public class StartUITest {
                         + "0. Show all Items" + ln
                         + "1. Exit program" + ln
                         + "=== Show all items ====" + ln
-                        + items.get(0) + ln
-                        + items.get(1) + ln
+                        + item + ln
+                        + item1 + ln
                         + "Menu." + ln
                         + "0. Show all Items" + ln
                         + "1. Exit program" + ln
@@ -113,14 +106,13 @@ public class StartUITest {
      public void whenFindByName() {
         Output out = new StubOutput();
         Tracker tracker = new Tracker();
-        ArrayList<Item> items = tracker.add(new Item("First"));
+        Item item = tracker.add(new Item("First"));
         Input in = new StubInput(
-                new String[] {"0", items.get(0).getName(), "1"}
+                new String[] {"0", item.getName(), "1"}
         );
-         UserAction[] actions = {
-                 new FindByNameAction(out),
-                 new ExitAction(),
-         };
+         List<UserAction> actions = new ArrayList<>();
+         actions.add(new FindByNameAction(out));
+         actions.add(new ExitAction());
          new StartUI(out).init(in, tracker, actions);
          String ln = System.lineSeparator();
          assertThat(out.toString(), is(
@@ -128,7 +120,7 @@ public class StartUITest {
                          + "0. Find by name" + ln
                          + "1. Exit program" + ln
                          + "=== Find items by name ====" + ln
-                         + items.get(0)
+                         + item
                          + ln + "Menu."
                          + ln
                          + "0. Find by name" + ln
@@ -140,14 +132,13 @@ public class StartUITest {
     public void whenFindByID() {
         Output out = new StubOutput();
         Tracker tracker = new Tracker();
-        ArrayList<Item> items = tracker.add(new Item("First"));
+        Item item = tracker.add(new Item("First"));
         Input in = new StubInput(
-                new String[] {"0", String.valueOf(items.get(0)), "1"}
+                new String[] {"0", String.valueOf(item.getId()), "1"}
         );
-        UserAction[] actions = {
-                new FindByIdAction(out),
-                new ExitAction(),
-        };
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new FindByIdAction(out));
+        actions.add(new ExitAction());
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString(), is(
@@ -155,7 +146,7 @@ public class StartUITest {
                         + "0. Find by Id" + ln
                         + "1. Exit program" + ln
                         + "=== Find item by id ====" + ln
-                        + items.get(0)
+                        + item
                         + ln + "Menu."
                         + ln
                         + "0. Find by Id" + ln
@@ -170,9 +161,8 @@ public class StartUITest {
                 new String[] {"9", "0"}
         );
         Tracker tracker = new Tracker();
-        UserAction[] actions = new UserAction[]{
-                new ExitAction()
-        };
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new ExitAction());
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString(), is(
