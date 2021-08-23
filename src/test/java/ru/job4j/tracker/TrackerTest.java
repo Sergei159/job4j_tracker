@@ -1,19 +1,22 @@
 package ru.job4j.tracker;
 
+import org.hamcrest.core.IsNull;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.core.IsNull.*;
 import static org.junit.Assert.assertThat;
-import static org.hamcrest.core.IsNull.nullValue;
 
 public class TrackerTest {
     @Test
     public void whenTestFindById() {
         Tracker tracker = new Tracker();
         Item bug = new Item("Bug");
-        Item item = tracker.add(bug);
-        Item result = tracker.findById(item.getId());
-        assertThat(result.getName(), is(item.getName()));
+        tracker.add(bug);
+        Item result = tracker.findById(1);
+        assertThat(result.getName(), is(bug.getName()));
     }
 
     @Test
@@ -23,8 +26,8 @@ public class TrackerTest {
         Item second = new Item("Second");
         tracker.add(first);
         tracker.add(second);
-        Item result = tracker.findAll()[0];
-        assertThat(result.getName(), is(first.getName()));
+        ArrayList<Item> result = tracker.findAll();
+        assertThat(result.get(0).getName(), is(first.getName()));
     }
 
     @Test
@@ -37,8 +40,8 @@ public class TrackerTest {
         tracker.add(new Item("First"));
         tracker.add(new Item("Second"));
         tracker.add(new Item("First"));
-        Item[] result = tracker.findByName(first.getName());
-        assertThat(result.length, is(3));
+        ArrayList<Item> result = tracker.findByName(first.getName());
+        assertThat(result.size(), is(3));
     }
 
     @Test
@@ -51,8 +54,8 @@ public class TrackerTest {
         tracker.add(new Item("First"));
         tracker.add(new Item("Second"));
         tracker.add(new Item("First"));
-        Item[] result = tracker.findByName(second.getName());
-        assertThat(result[1].getName(), is(second.getName()));
+        ArrayList<Item> result = tracker.findByName(second.getName());
+        assertThat(result.get(1).getName(), is(second.getName()));
     }
 
    @Test
@@ -74,8 +77,11 @@ public class TrackerTest {
         Item bug = new Item();
         bug.setName("Bug");
         tracker.add(bug);
+        Item bug1 = new Item();
+        bug.setName("Bug1");
+        tracker.add(bug1);
         int id = bug.getId();
         tracker.delete(id);
-        assertThat(tracker.findById(id), is(nullValue()));
+        assertThat(tracker.findById(id).getName(), is(nullValue()));
     }
 }

@@ -10,10 +10,6 @@ public class FindEl {
                 break;
             }
         }
-        if (rsl == -1) {
-            throw new ElementNotFoundException(
-                    "Name is not found");
-        }
         return rsl;
       }
 
