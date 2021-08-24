@@ -1,8 +1,6 @@
 package ru.job4j.tracker;
 
-import org.hamcrest.core.IsNull;
 import org.junit.Test;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -77,11 +75,8 @@ public class TrackerTest {
         Item bug = new Item();
         bug.setName("Bug");
         tracker.add(bug);
-        Item bug1 = new Item();
-        bug.setName("Bug1");
-        tracker.add(bug1);
         int id = bug.getId();
         tracker.delete(id);
-        assertThat(tracker.findById(id).getName(), is(nullValue()));
+        assertThat(tracker.findById(id), is(nullValue()));
     }
 }
