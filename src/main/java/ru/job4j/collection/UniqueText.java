@@ -11,8 +11,8 @@ public class UniqueText {
         for (String or : origin) {
             check.add(or);
         }
-        for (int i = 0; i < check.size(); i++) {
-            if (!check.contains(text[i])) {
+        for (String word : text) {
+            if (!check.contains(word)) {
                 rsl = false;
                 break;
             }
