@@ -1,7 +1,8 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
-import java.util.List;
+
+import java.util.*;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsNull.*;
@@ -79,4 +80,41 @@ public class TrackerTest {
         tracker.delete(id);
         assertThat(tracker.findById(id), is(nullValue()));
     }
+
+    @Test
+    public void whenAscendingSortByName() {
+        AscendingSortItem sort = new AscendingSortItem();
+        List<Item> items = new ArrayList<>();
+        items.add(new Item(1, "Sergei"));
+        items.add(new Item(2, "Alex"));
+        items.add(new Item(3, "Andrei"));
+        items.add(new Item(4, "Alexei"));
+        Collections.sort(items, sort);
+        List<Item> expected = new ArrayList<>(
+                Arrays.asList(
+                        new Item(2, "Alex"),
+                        new Item(4, "Alexei"),
+                        new Item(3, "Andrei"),
+                        new Item(1, "Sergei")));
+        assertThat(items, is(expected));
+    }
+
+    @Test
+    public void whenDescendingSortByName() {
+        DescendingSortItem sort = new DescendingSortItem();
+        List<Item> items = new ArrayList<>();
+        items.add(new Item(1, "Sergei"));
+        items.add(new Item(2, "Alex"));
+        items.add(new Item(3, "Andrei"));
+        items.add(new Item(4, "Alexei"));
+        Collections.sort(items, sort);
+        List<Item> expected = new ArrayList<>(
+                Arrays.asList(
+                        new Item(1, "Sergei"),
+                        new Item(3, "Andrei"),
+                        new Item(4, "Alexei"),
+                        new Item(2, "Alex")));
+        assertThat(items, is(expected));
+    }
+
 }
