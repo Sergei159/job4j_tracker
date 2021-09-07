@@ -1,9 +1,18 @@
+/**
+ * Модель данных Account
+ */
 package ru.job4j.bank;
 
 import java.util.Objects;
 
 public class Account {
+    /**
+     * реквизиты аккаунта пользователя
+     */
     private String requisite;
+    /**
+     * баланс аккаунта
+     */
     private double balance;
 
     public Account(String requisite, double balance) {

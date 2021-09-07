@@ -1,9 +1,18 @@
+/**
+ * Модель данных User
+ */
 package ru.job4j.bank;
 
 import java.util.Objects;
 
 public class User {
+    /**
+     * Паспорт пользователя
+     */
     private String passport;
+    /**
+     * Имя пользователя
+     */
     private String username;
 
     public User(String passport, String username) {
