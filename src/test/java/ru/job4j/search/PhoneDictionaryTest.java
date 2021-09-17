@@ -37,3 +37,4 @@ public class PhoneDictionaryTest {
         assertThat(persons, is(IsEmptyCollection.empty()));
     }
 }
+
