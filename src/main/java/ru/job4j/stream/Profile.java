@@ -9,7 +9,7 @@ public class Profile {
         this.address = address;
     }
 
-    public Address getAdress() {
+    public Address getAddress() {
         return address;
     }
 

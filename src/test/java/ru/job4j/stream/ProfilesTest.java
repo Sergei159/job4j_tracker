@@ -25,4 +25,29 @@ public class ProfilesTest {
         assertThat(Profiles.collect(expected), is(list));
     }
 
+    @Test
+    public void whenNoDuplicateAddresses() {
+        List<Address> list = Arrays.asList(
+                new Address("Perm", "Lenina", 3, 59),
+                new Address("Perm", "Elkina", 7, 25),
+                new Address("Perm", "Elkina", 7, 25),
+                new Address("Perm", "Elkina", 7, 25),
+                new Address("Moscow", "Lenina", 1, 22)
+        );
+        List<Profile> expected = Arrays.asList(
+                new Profile(list.get(0)),
+                new Profile(list.get(1)),
+                new Profile(list.get(2)),
+                new Profile(list.get(3)),
+                new Profile(list.get(4))
+
+        );
+        assertThat(Profiles.uniqueCollect(expected), is(
+                Arrays.asList(
+                        list.get(4),
+                        list.get(0),
+                        list.get(3)
+                )));
+    }
+
 }
