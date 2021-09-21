@@ -5,13 +5,9 @@ import java.util.Comparator;
 public class DescDepComp implements Comparator<String> {
     @Override
     public int compare(String left, String right) {
-     for (int i = 0; i < Math.min(left.length(), right.length()); i++) {
-        char ch1 = left.charAt(i);
-        char ch2 = right.charAt(i);
-        if (ch1 != ch2) {
-            return Character.compare(ch2, ch1);
-        }
-    }
-        return Integer.compare(right.length(), left.length());
+        String[] leftArray = left.split("/");
+        String[] rightArray = right.split("/");
+        int rsl = rightArray[0].compareTo(leftArray[0]);
+        return rsl == 0 ? right.compareTo(left) : rsl;
     }
 }
