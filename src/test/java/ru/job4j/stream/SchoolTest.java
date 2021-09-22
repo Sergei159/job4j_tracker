@@ -79,9 +79,11 @@ public class SchoolTest {
                 new Student(90, "Surname9")
         );
         Map<String, Student> studentMap = new HashMap<>();
-        for (Student student : students) {
-            studentMap.put(student.getSurname(), student);
-        }
+        studentMap.put("Surname1", new Student(10, "Surname1"));
+        studentMap.put("Surname4", new Student(40, "Surname4"));
+        studentMap.put("Surname6", new Student(60, "Surname6"));
+        studentMap.put("Surname9", new Student(90, "Surname9"));
+
         assertThat(School.listToMap(students), is(studentMap));
     }
 
