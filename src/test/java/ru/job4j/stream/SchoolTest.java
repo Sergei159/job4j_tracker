@@ -83,7 +83,6 @@ public class SchoolTest {
         studentMap.put("Surname4", new Student(40, "Surname4"));
         studentMap.put("Surname6", new Student(60, "Surname6"));
         studentMap.put("Surname9", new Student(90, "Surname9"));
-
         assertThat(School.listToMap(students), is(studentMap));
     }
 
