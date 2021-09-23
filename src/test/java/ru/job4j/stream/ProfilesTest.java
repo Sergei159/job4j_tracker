@@ -12,12 +12,12 @@ public class ProfilesTest {
 
     @Test
     public void whenEqualAddresses() {
-        List<Address> list = Arrays.asList(
+        List<Address> list = List.of(
                 new Address("Perm", "Lenina", 3, 59),
                 new Address("Perm", "Elkina", 7, 25),
                 new Address("Moscow", "Lenina", 1, 22)
         );
-        List<Profile> expected = Arrays.asList(
+        List<Profile> expected = List.of(
                 new Profile(list.get(0)),
                 new Profile(list.get(1)),
                 new Profile(list.get(2))
@@ -27,14 +27,14 @@ public class ProfilesTest {
 
     @Test
     public void whenNoDuplicateAddresses() {
-        List<Address> list = Arrays.asList(
+        List<Address> list = List.of(
                 new Address("Perm", "Lenina", 3, 59),
                 new Address("Perm", "Elkina", 7, 25),
                 new Address("Perm", "Elkina", 7, 25),
                 new Address("Perm", "Elkina", 7, 25),
                 new Address("Moscow", "Lenina", 1, 22)
         );
-        List<Profile> expected = Arrays.asList(
+        List<Profile> expected = List.of(
                 new Profile(list.get(0)),
                 new Profile(list.get(1)),
                 new Profile(list.get(2)),
@@ -43,7 +43,7 @@ public class ProfilesTest {
 
         );
         assertThat(Profiles.uniqueCollect(expected), is(
-                Arrays.asList(
+                List.of(
                         list.get(4),
                         list.get(0),
                         list.get(3)

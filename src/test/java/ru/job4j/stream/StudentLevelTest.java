@@ -12,9 +12,10 @@ public class StudentLevelTest {
 
     @Test
     public void whenSorted() {
-        List<Student> input = new ArrayList<>();
-        input.add(new Student(28, "Masha"));
-        input.add(new Student(128, "Pety"));
+        List<Student> input = List.of(
+        new Student(28, "Masha"),
+        new Student(128, "Pety")
+        );
         List<Student> expected = List.of(
                 new Student(128, "Pety"),
                 new Student(28, "Masha")
