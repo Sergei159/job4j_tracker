@@ -20,6 +20,10 @@ public class Student {
         return surname;
     }
 
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -37,4 +41,13 @@ public class Student {
     public int hashCode() {
         return Objects.hash(score, surname);
     }
+
+    @Override
+    public String toString() {
+        return "{"
+                + "Score='" + score + '\''
+                + ", Surname=" + surname
+                + '}';
+    }
+
 }
