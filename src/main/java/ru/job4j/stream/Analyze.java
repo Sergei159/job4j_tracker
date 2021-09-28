@@ -1,6 +1,7 @@
 package ru.job4j.stream;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,11 +36,24 @@ public class Analyze {
                         Subject::getName,
                         Collectors.averagingDouble(Subject::getScore)
                         ));
-        return List.of();
+        List<Tuple> rsl = intermedia.entrySet().stream()
+               .map(s -> new Tuple(
+                       s.getKey(),
+                       s.getValue()
+               ))
+               .collect(Collectors.toList());
+        return rsl;
     }
 
     public static Tuple bestStudent(Stream<Pupil> stream) {
-        return null;
+        return (Tuple) stream.map(pupil -> new Tuple(
+                        pupil.getName(),
+                        Stream.of(pupil.getSubjects())
+                                .flatMap(Collection::stream)
+                                .mapToInt(Subject::getScore)
+                                .max()
+                                .orElse(0)
+                ));
     }
 
     public static Tuple bestSubject(Stream<Pupil> stream) {
