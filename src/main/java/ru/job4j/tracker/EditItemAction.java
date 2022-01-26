@@ -13,12 +13,12 @@ public class EditItemAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, SqlTracker tracker) {
+    public boolean execute(Input input, Store store) {
         out.println("=== Edit item ====");
         int id = input.askInt("Enter id: ");
         String name = input.askString("Enter name: ");
         Item item = new Item(name);
-        if (tracker.replace(id, item)) {
+        if (store.replace(id, item)) {
             out.println("Заявка изменена успешно.");
         } else {
             out.println("Ошибка замены заявки.");

@@ -1,6 +1,4 @@
-/**
- *
- *
+
 package ru.job4j.tracker;
 import org.junit.Test;
 
@@ -18,7 +16,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", "Item name", "1"}
         );
-        SqlTracker tracker = new SqlTracker();
+        MemTracker tracker = new MemTracker();
         List<UserAction> actions = new ArrayList<>();
         actions.add(new CreateAction(out));
         actions.add(new ExitAction());
@@ -30,7 +28,7 @@ public class StartUITest {
     @Test
     public void whenReplaceItem() {
         Output out = new StubOutput();
-        SqlTracker tracker = new SqlTracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Replaced item"));
         String replacedName = "New item name";
         Input in = new StubInput(
@@ -48,7 +46,7 @@ public class StartUITest {
     @Test
     public void whenDeleteItem() {
         Output out = new StubOutput();
-        SqlTracker tracker = new SqlTracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(
                 new Item("Deleted item"));
         Input in = new StubInput(
@@ -67,7 +65,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0"}
         );
-        SqlTracker tracker = new SqlTracker();
+        MemTracker tracker = new MemTracker();
         List<UserAction> actions = new ArrayList<>();
         actions.add(new ExitAction());
         new StartUI(out).init(in, tracker, actions);
@@ -80,7 +78,7 @@ public class StartUITest {
     @Test
     public void whenFindAll() {
         Output out = new StubOutput();
-        SqlTracker tracker = new SqlTracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("First"));
         Item item1 = tracker.add(new Item("Scond"));
         Input in = new StubInput(
@@ -107,7 +105,7 @@ public class StartUITest {
      @Test
      public void whenFindByName() {
         Output out = new StubOutput();
-         SqlTracker tracker = new SqlTracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("First"));
         Input in = new StubInput(
                 new String[] {"0", item.getName(), "1"}
@@ -133,7 +131,7 @@ public class StartUITest {
     @Test
     public void whenFindByID() {
         Output out = new StubOutput();
-        SqlTracker tracker = new SqlTracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("First"));
         Input in = new StubInput(
                 new String[] {"0", String.valueOf(item.getId()), "1"}
@@ -162,7 +160,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"9", "0"}
         );
-        SqlTracker tracker = new SqlTracker();
+        MemTracker tracker = new MemTracker();
         List<UserAction> actions = new ArrayList<>();
         actions.add(new ExitAction());
         new StartUI(out).init(in, tracker, actions);
@@ -176,4 +174,4 @@ public class StartUITest {
                 )
         );
     }
-}*/
+}
