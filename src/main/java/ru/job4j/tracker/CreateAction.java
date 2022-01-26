@@ -13,7 +13,7 @@ public class CreateAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, MemTracker tracker) {
+    public boolean execute(Input input, SqlTracker tracker) {
         out.println("=== Create a new Item ====");
         String name = input.askString("Enter name: ");
         Item item = new Item(name);

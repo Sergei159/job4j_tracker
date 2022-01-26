@@ -13,7 +13,7 @@ public class EditItemAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, MemTracker tracker) {
+    public boolean execute(Input input, SqlTracker tracker) {
         out.println("=== Edit item ====");
         int id = input.askInt("Enter id: ");
         String name = input.askString("Enter name: ");

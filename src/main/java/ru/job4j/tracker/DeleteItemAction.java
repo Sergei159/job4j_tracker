@@ -13,7 +13,7 @@ public class DeleteItemAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, MemTracker tracker) {
+    public boolean execute(Input input, SqlTracker tracker) {
         out.println("=== Delete item ====");
         int id = input.askInt("Enter id: ");
         if (tracker.delete(id)) {
