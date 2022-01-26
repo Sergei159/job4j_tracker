@@ -52,21 +52,3 @@ public class StartUI {
         }
     }
 }
-
-
-
-//
-//        Output output = new ConsoleOutput();
-//        Input input = new ValidateInput(output, new ConsoleInput());
-//        MemTracker tracker = new MemTracker();
-//        List<UserAction> actions = new ArrayList<>();
-//        actions.add(new CreateAction(output));
-//        actions.add(new ShowAllAction(output));
-//        actions.add(new EditItemAction(output));
-//        actions.add(new DeleteItemAction(output));
-//        actions.add(new FindByIdAction(output));
-//        actions.add(new FindByNameAction(output));
-//        actions.add(new ExitAction());
-//        new StartUI(output).init(input, tracker, actions);
-//    }
-//}
