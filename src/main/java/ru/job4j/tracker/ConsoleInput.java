@@ -9,7 +9,7 @@ public class ConsoleInput implements Input {
 
     @Override
     public String askString(String question) {
-        out.print(question);
+        out.println(question);
         return scanner.nextLine();
     }
 
