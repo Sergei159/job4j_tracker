@@ -62,7 +62,7 @@ public class SqlTrackerTest {
     }
 
     @Test
-    public void whenFindByName() {
+    public void whenSQLFindByName() {
         SqlTracker tracker = new SqlTracker(connection);
         Item item1 = new Item("item");
         Item item2 = new Item("item");
@@ -73,20 +73,20 @@ public class SqlTrackerTest {
     }
 
     @Test
-    public void whenFindAll() {
+    public void whenSQLFindAll() {
         SqlTracker tracker = new SqlTracker(connection);
         Item item1 = new Item("item");
         Item item2 = new Item("item2");
         Item item3 = new Item("item3");
         tracker.add(item1);
         tracker.add(item2);
-        tracker.add(item2);
+        tracker.add(item3);
         List<Item> result = tracker.findAll();
         assertThat(result.size(), is(3));
     }
 
     @Test
-    public void whenDelete() {
+    public void whenSQLDelete() {
         SqlTracker tracker = new SqlTracker(connection);
         Item item1 = new Item("item");
         Item item2 = new Item("item2");
@@ -97,6 +97,19 @@ public class SqlTrackerTest {
         tracker.delete(item1.getId());
         List<Item> result = tracker.findAll();
         assertThat(result.size(), is(2));
+    }
+
+    @Test
+    public void whenSQLReplace() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item1 = new Item("item");
+        Item item2 = new Item("item2");
+        Item item3 = new Item("item3");
+        tracker.add(item1);
+        tracker.add(item2);
+        tracker.add(item3);
+        tracker.replace(item1.getId(), item3);
+        assertThat(tracker.findById(item1.getId()).getName(), is(item3.getName()));
     }
 
 }
