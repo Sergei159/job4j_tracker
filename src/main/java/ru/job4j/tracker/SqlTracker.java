@@ -13,22 +13,18 @@ public class SqlTracker implements Store, AutoCloseable {
 
     private Connection cn;
 
-    public void init() throws ClassNotFoundException {
-        Properties config = new Properties();
-        try {
-            config.load(new FileReader("src/resources/app.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Class.forName(config.getProperty("driver-class-name"));
-        try {
+    public void init() {
+        try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
+            Properties config = new Properties();
+            config.load(in);
+            Class.forName(config.getProperty("driver-class-name"));
             cn = DriverManager.getConnection(
                     config.getProperty("url"),
                     config.getProperty("username"),
                     config.getProperty("password")
             );
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
     }
 
@@ -130,7 +126,7 @@ public class SqlTracker implements Store, AutoCloseable {
                 "Select * from items where id = ?")) {
             ps.setInt(1, id);
             try (ResultSet resultSet = ps.executeQuery()) {
-                while (resultSet.next()) {
+                if (resultSet.next()) {
                      item = setItemData(resultSet);
                 }
             }
@@ -148,5 +144,9 @@ public class SqlTracker implements Store, AutoCloseable {
         Timestamp timestamp = resultSet.getTimestamp("created");
         item.setCreated(timestamp.toLocalDateTime());
         return item;
+    }
+
+    public void setConnection(Connection cn) {
+        this.cn = cn;
     }
 }
