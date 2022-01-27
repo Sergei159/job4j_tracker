@@ -81,7 +81,7 @@ public class SqlTracker implements Store, AutoCloseable {
     public boolean delete(int id) {
         boolean result = false;
         try (PreparedStatement ps =
-                     cn.prepareStatement("delete * from items where id = ? ")) {
+                     cn.prepareStatement("delete  from items where id = ? ")) {
             ps.setInt(1, id);
             result = ps.executeUpdate() > 0;
         } catch (Exception e) {
