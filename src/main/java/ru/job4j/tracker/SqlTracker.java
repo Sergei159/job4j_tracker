@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-
 public class SqlTracker implements Store, AutoCloseable {
 
     private Connection cn;
